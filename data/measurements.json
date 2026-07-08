@@ -1,4 +1,31 @@
 {
   "last_updated": "2026-07-08",
-  "measurements": []
+  "measurements": [
+    {
+      "id": "shoes-2024",
+      "value": 73.17,
+      "uncertainty_plus": 0.86,
+      "uncertainty_minus": 0.86,
+      "method": "distance_ladder",
+      "technique": "Cepheids + Type Ia SNe",
+      "family": "late_universe",
+      "collaboration": "SH0ES",
+      "year": 2024,
+      "arxiv": "2404.08038",
+      "notes": ""
+    },
+    {
+      "id": "planck-2018",
+      "value": 67.4,
+      "uncertainty_plus": 0.5,
+      "uncertainty_minus": 0.5,
+      "method": "cmb",
+      "technique": "CMB power spectrum (ΛCDM inference)",
+      "family": "early_universe",
+      "collaboration": "Planck",
+      "year": 2018,
+      "arxiv": "1807.06209",
+      "notes": ""
+    }
+  ]
 }
