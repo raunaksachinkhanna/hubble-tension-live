@@ -26,6 +26,32 @@
       "year": 2018,
       "arxiv": "1807.06209",
       "notes": ""
+    },
+    {
+      "id": "desi-2025",
+      "value": 68.51,
+      "uncertainty_plus": 0.58,
+      "uncertainty_minus": 0.58,
+      "method": "bao",
+      "technique": "BAO (galaxies + quasars + Lyα) + BBN prior",
+      "family": "early_universe",
+      "collaboration": "DESI",
+      "year": 2025,
+      "arxiv": "2503.14738",
+      "notes": ""
+    },
+    {
+      "id": "cchp-2025",
+      "value": 70.39,
+      "uncertainty_plus": 1.94,
+      "uncertainty_minus": 1.94,
+      "method": "distance_ladder",
+      "technique": "TRGB + Type Ia SNe (HST+JWST)",
+      "family": "late_universe",
+      "collaboration": "CCHP",
+      "year": 2025,
+      "arxiv": "2408.06153",
+      "notes": ""
     }
   ]
 }
