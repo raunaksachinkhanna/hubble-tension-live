@@ -1,0 +1,162 @@
+:root {
+  color-scheme: light;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --text: #1a1a2e;
+  --muted: #5a5a72;
+  --border: #d8d8e2;
+  --bg: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 2rem 1rem 3rem;
+  background: var(--bg);
+  color: var(--text);
+}
+
+main {
+  max-width: 840px;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 1.6rem;
+  margin-bottom: 0.25rem;
+}
+
+.framing {
+  font-size: 1.05rem;
+  color: var(--muted);
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  max-width: 640px;
+}
+
+.chart-wrapper {
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.chart-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.axis-line {
+  stroke: var(--muted);
+  stroke-width: 1;
+}
+
+.tick-line {
+  stroke: var(--border);
+  stroke-width: 1;
+}
+
+.tick-label {
+  font-size: 11px;
+  fill: var(--muted);
+}
+
+.axis-title {
+  font-size: 12px;
+  fill: var(--text);
+}
+
+.error-bar {
+  stroke-width: 2;
+}
+
+.error-cap {
+  stroke-width: 2;
+}
+
+.point {
+  stroke: #ffffff;
+  stroke-width: 1.5;
+  cursor: pointer;
+}
+
+.point-group:focus {
+  outline: none;
+}
+
+.point-group:focus .point {
+  stroke: var(--text);
+  stroke-width: 2.5;
+}
+
+.chart-empty {
+  text-align: center;
+  color: var(--muted);
+  padding: 3rem 0;
+}
+
+.legend {
+  display: flex;
+  gap: 1.25rem;
+  margin: 0.75rem 0 1rem;
+  font-size: 0.9rem;
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.legend-swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.chart-tooltip {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  background: var(--text);
+  color: #fff;
+  padding: 0.5rem 0.7rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  pointer-events: auto;
+  max-width: 220px;
+  z-index: 10;
+  margin-top: -10px;
+}
+
+.chart-tooltip a.tooltip-link {
+  color: #9cc4ff;
+}
+
+.tooltip-collab {
+  font-weight: 600;
+}
+
+#last-updated {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-top: 1rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --text: #ececf4;
+    --muted: #a0a0b8;
+    --border: #34344a;
+    --bg: #121220;
+  }
+
+  .point {
+    stroke: #121220;
+  }
+}
