@@ -234,13 +234,17 @@ export function renderChart(container, measurements) {
     const color = FAMILY_COLORS[m.family];
     const capWidth = 5;
 
+    const paperUrl = `https://arxiv.org/abs/${m.arxiv}`;
+
     const group = svgEl("g", {
       class: "point-group",
       tabindex: "0",
       role: "button",
       "aria-label": `${m.collaboration}, ${m.value} ${formatUncertainty(
         m
-      )} km/s/Mpc, ${m.technique}, ${m.year}`,
+      )} km/s/Mpc, ${m.technique}, ${m.year} — opens arXiv:${
+        m.arxiv
+      } in a new tab`,
     });
 
     group.appendChild(
@@ -296,6 +300,19 @@ export function renderChart(container, measurements) {
     group.addEventListener("mouseleave", () => tooltip.scheduleHide());
     group.addEventListener("focus", () => tooltip.show(group, m));
     group.addEventListener("blur", () => tooltip.scheduleHide());
+
+    // The point itself is the primary way to reach the source paper —
+    // tooltips can't reliably hold a clickable link on touch/hover-averse
+    // devices, so clicking (or Enter/Space when focused) opens it directly.
+    group.addEventListener("click", () => {
+      window.open(paperUrl, "_blank", "noopener,noreferrer");
+    });
+    group.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        window.open(paperUrl, "_blank", "noopener,noreferrer");
+      }
+    });
   }
 
   container.appendChild(svg);
