@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-07-08",
+  "last_updated": "2026-07-10",
   "measurements": [
     {
       "id": "shoes-2024",
@@ -51,6 +51,19 @@
       "collaboration": "CCHP",
       "year": 2025,
       "arxiv": "2408.06153",
+      "notes": ""
+    },
+    {
+      "id": "h0dn-2026",
+      "value": 73.50,
+      "uncertainty_plus": 0.81,
+      "uncertainty_minus": 0.81,
+      "method": "distance_ladder",
+      "technique": "Distance Network (multi-indicator covariance-weighted)",
+      "family": "late_universe",
+      "collaboration": "H0DN",
+      "year": 2026,
+      "arxiv": "2510.23823",
       "notes": ""
     }
   ]
