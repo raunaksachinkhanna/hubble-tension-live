@@ -1,9 +1,15 @@
-import { renderChart, renderLegend, initChartTooltip } from "./chart.js";
+import {
+  renderChart,
+  renderLegend,
+  initChartTooltip,
+  renderTensionCalculator,
+} from "./chart.js";
 
 async function init() {
   const chartContainer = document.getElementById("chart");
   const legendContainer = document.getElementById("legend");
   const updatedContainer = document.getElementById("last-updated");
+  const tensionContainer = document.getElementById("tension-calculator");
 
   initChartTooltip(chartContainer);
   renderLegend(legendContainer);
@@ -24,6 +30,7 @@ async function init() {
   }
 
   renderChart(chartContainer, data.measurements);
+  renderTensionCalculator(tensionContainer, data.measurements);
   updatedContainer.textContent = `Data last updated: ${data.last_updated}`;
 }
 

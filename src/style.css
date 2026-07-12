@@ -150,6 +150,64 @@ h1 {
   margin-top: 1rem;
 }
 
+.tension-calculator {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.tension-calculator h2 {
+  font-size: 1.05rem;
+  margin: 0 0 0.9rem;
+}
+
+.tension-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.tension-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.tension-select {
+  font: inherit;
+  font-size: 0.9rem;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.tension-vs {
+  color: var(--muted);
+  font-size: 0.85rem;
+  padding-bottom: 0.45rem;
+}
+
+.tension-result {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0.25rem 0 0.6rem;
+}
+
+.tension-caveat {
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.45;
+  margin: 0;
+  max-width: 640px;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     color-scheme: dark;

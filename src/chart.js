@@ -340,3 +340,115 @@ export function renderLegend(container) {
 export function initChartTooltip(container) {
   container._tooltip = setupTooltip(container);
 }
+
+// --- σ-tension calculator ---
+// Naive pairwise tension: |value_a - value_b| / sqrt(sigma_a^2 + sigma_b^2).
+// This assumes independence — see the caveat text rendered alongside it.
+
+// uncertainty_plus and uncertainty_minus are currently always equal in the
+// dataset, but averaging them keeps this correct if an asymmetric entry
+// is ever added.
+function symmetricUncertainty(m) {
+  return (m.uncertainty_plus + m.uncertainty_minus) / 2;
+}
+
+export function computeTensionSigma(a, b) {
+  const sigmaA = symmetricUncertainty(a);
+  const sigmaB = symmetricUncertainty(b);
+  return Math.abs(a.value - b.value) / Math.sqrt(sigmaA ** 2 + sigmaB ** 2);
+}
+
+function measurementLabel(m) {
+  return `${m.collaboration} (${m.year})`;
+}
+
+function buildMeasurementSelect(measurements, defaultId) {
+  const select = document.createElement("select");
+  select.className = "tension-select";
+  for (const m of measurements) {
+    const option = optionEl(m.id, measurementLabel(m));
+    select.appendChild(option);
+  }
+  const hasDefault = measurements.some((m) => m.id === defaultId);
+  select.value = hasDefault ? defaultId : measurements[0].id;
+  return select;
+}
+
+function optionEl(value, text) {
+  const option = document.createElement("option");
+  option.value = value;
+  option.textContent = text;
+  return option;
+}
+
+export function renderTensionCalculator(container, measurements) {
+  container.innerHTML = "";
+
+  if (measurements.length < 2) {
+    const empty = document.createElement("p");
+    empty.className = "chart-empty";
+    empty.textContent = "Need at least two measurements to compare.";
+    container.appendChild(empty);
+    return;
+  }
+
+  const heading = document.createElement("h2");
+  heading.textContent = "σ-tension calculator";
+  container.appendChild(heading);
+
+  const controls = document.createElement("div");
+  controls.className = "tension-controls";
+
+  const fieldA = document.createElement("label");
+  fieldA.className = "tension-field";
+  fieldA.appendChild(document.createTextNode("Measurement A"));
+  const selectA = buildMeasurementSelect(measurements, "shoes-2024");
+  fieldA.appendChild(selectA);
+
+  const vs = document.createElement("span");
+  vs.className = "tension-vs";
+  vs.textContent = "vs";
+
+  const fieldB = document.createElement("label");
+  fieldB.className = "tension-field";
+  fieldB.appendChild(document.createTextNode("Measurement B"));
+  const selectB = buildMeasurementSelect(measurements, "planck-2018");
+  fieldB.appendChild(selectB);
+
+  controls.appendChild(fieldA);
+  controls.appendChild(vs);
+  controls.appendChild(fieldB);
+  container.appendChild(controls);
+
+  const result = document.createElement("p");
+  result.className = "tension-result";
+  container.appendChild(result);
+
+  const caveat = document.createElement("p");
+  caveat.className = "tension-caveat";
+  caveat.textContent =
+    "This is a simplified estimate: it assumes the two measurements are " +
+    "statistically independent. Some pairs (e.g. SH0ES and CCHP) share " +
+    "calibration steps, so their true combined tension differs from this " +
+    "naive value — this is not a rigorous joint analysis.";
+  container.appendChild(caveat);
+
+  function update() {
+    const a = measurements.find((m) => m.id === selectA.value);
+    const b = measurements.find((m) => m.id === selectB.value);
+
+    if (!a || !b || a.id === b.id) {
+      result.textContent = "Select two different measurements to compare.";
+      return;
+    }
+
+    const sigma = computeTensionSigma(a, b);
+    result.textContent = `${a.collaboration} vs ${b.collaboration}: ${sigma.toFixed(
+      1
+    )}σ`;
+  }
+
+  selectA.addEventListener("change", update);
+  selectB.addEventListener("change", update);
+  update();
+}
